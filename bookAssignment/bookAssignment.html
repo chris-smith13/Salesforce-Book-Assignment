@@ -1,0 +1,83 @@
+<template>
+
+    <lightning-card title="Apex Class to Create a Book Object" icon-name="custom:custom55">
+        <div class="slds-card__body slds-card__body_inner">
+            The name of your book is {name}
+        </div>
+      
+        <p class="slds-p-horizontal_small">
+            <lightning-input label="Enter Name of Book" name="name" type="String" value={name} onchange={handleChange}>
+            </lightning-input>
+            <lightning-input label="Enter Author Name" name="setAuthor" type="String" value={setAuthor} onchange={handleChange}>
+            </lightning-input>
+            <lightning-input label="Enter Publisher of Book" name="setPublisher" type="String" value={setPublisher} onchange={handleChange}>
+            </lightning-input>
+            <lightning-input label="Enter Year" name="setYear" type="Decimal" value={setYear} onchange={handleChange}>
+            </lightning-input>
+            <lightning-input label="Enter Cost" name="setCost" type="Decimal" value={setCost} onchange={handleChange}>
+            </lightning-input>
+            <lightning-button variant="brand" label="Call CreateBook Apex method"
+            onclick={createBook}>
+            </lightning-button>
+        </p>
+    </lightning-card>
+
+    <lightning-card title="Create Book with LWC" icon-name="custom:custom9">
+        <div class = slds-p-around_medium>
+            <lightning-record-form
+            object-api-name={objectName}
+            fields={fieldList}
+            onsuccess={successHandler}
+            ></lightning-record-form>
+        </div>
+    </lightning-card>
+ 
+    <lightning-card title="Apex Class to Retrieve all Books from Booklist" icon-name="custom:custom18">
+        <div class="slds-p-around_medium">
+            <lightning-button variant="brand" label="Call Booklist Apex method" 
+            onclick={handleClick}>
+        
+            </lightning-button>
+        </div>
+        <template if:true={bookList}>
+            <div class="slds-p-around_medium">
+                <lightning-button variant="brand" label="Hide Books"
+                onclick={toggleBookList}>
+                </lightning-button>
+            </div>
+            <template for:each={bookList} for:item="book">
+                <div class="slds-box slds-box_xx-small" key={bookList.Id}>
+                    <p><strong>Name : </strong> {book.Name}</p>
+                    <p><strong>Author : </strong> {book.Author__c}</p>
+                    <p><strong>Year : </strong> {book.Year__c}</p>
+                    <p><strong>Publisher : </strong> {book.Publisher__c}</p>
+                    <p><strong>Cost : </strong> ${book.Cost__c}</p>
+                </div>
+               
+            </template>
+        
+        </template>
+      
+    </lightning-card>
+
+    <lightning-card title="Apex Class to Delete a Book Based on Title" icon-name="action:delete">
+        <div class = slds-p-around_medium>
+            <lightning-input label="Enter Book Title to Delete" name="deletedTitle" type="String" value={deletedTitle} onchange={handleChange}>
+
+            </lightning-input>
+            <lightning-button variant="brand" label= "Delete Book" 
+            onclick={deleteBook}>
+
+            </lightning-button>
+        </div>
+    </lightning-card>
+
+    <lightning-card title="Apex Class to Delete All Book Objects" icon-name="action:delete">
+        <div class="slds-p-around_medium">
+            <lightning-button variant="brand" label="Delete All Books" onclick={deleteAll}>
+
+            </lightning-button>
+        </div>
+    </lightning-card>
+
+</template>
